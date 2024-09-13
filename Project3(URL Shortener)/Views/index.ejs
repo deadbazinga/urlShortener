@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+        integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+        crossorigin="anonymous"></script>
+    <style>
+        .result {
+            border: 1px solid rgb(203, 201, 201);
+            border-radius: 6px;
+            height: 36px;
+            background: white;
+            font-size: 14px;
+            padding: 6px;
+            /* width: 100%; */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="http://localhost:8008">
+                URL Shortener
+            </a>
+            <a href="http://localhost:8008/analytics"><img  width="50px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScI6U8fbO6W-Eq2y6XfHqoHitc599LXky8-A&s" alt="anal"></a>
+        </div>
+    </nav>
+
+    <div class="container-fluid bg-light" style="min-height: 100vh">
+        <div class="container pt-4">
+            <div class="jumbotron">
+                <form method="POST" action="/url">
+                    <input class="form-control" id="url" name="url" type="text" placeholder="Enter a URL..."
+                        aria-label="URL" aria-describedby="basic-addon1">
+                    <button class="btn btn-outline-success mt-2" type="submit">
+                        Generate short URL</button>
+                </form>
+            </div>
+            <% if (locals.id) { %>
+                <div class="jumbotron">
+                    <p id="generatedUrl" class="result"> http://localhost:8008/url/<%=id%>
+                    </p>
+                    <button class="btn btn-outline-dark" type="button" onclick="copyUrl()">
+                        Copy</button>
+                </div>
+                <% } %>
+        </div>
+    </div>
+    <script>
+        function copyUrl() {
+            const url=document.getElementById("generatedUrl").textContent
+            navigator.clipboard.writeText(url)
+            alert("Url copied!!")
+        }
+    </script>
+</body>
+
+</html>
